@@ -1,0 +1,303 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a>grunt-lintspaces (v0.8.1)</a>
+</h1>
+<h4>A Grunt task for checking spaces in files</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.grunt-lintspaces">module grunt-lintspaces</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.grunt-lintspaces.grunt-lintspaces">
+            function <span class="apidocSignatureSpan"></span>grunt-lintspaces
+            <span class="apidocSignatureSpan">(grunt)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.grunt-lintspaces" id="apidoc.module.grunt-lintspaces">module grunt-lintspaces</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.grunt-lintspaces.grunt-lintspaces" id="apidoc.element.grunt-lintspaces.grunt-lintspaces">
+        function <span class="apidocSignatureSpan"></span>grunt-lintspaces
+        <span class="apidocSignatureSpan">(grunt)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">grunt-lintspaces = function (grunt) {
+	// project configuration
+	grunt.initConfig({
+		pkg: grunt.file.readJSON('package.json'),
+
+		jshint: {
+			all: [
+				'Gruntfile.js',
+				'tasks/**/*.js',
+				'tests/*.js'
+			],
+			options: {
+				jshintrc: '.jshintrc'
+			}
+		},
+
+		jscs: {
+			all: [
+				'Gruntfile.js',
+				'tasks/**/*.js',
+				'tests/*.js'
+			]
+		},
+
+		nodeunit: {
+			all: [
+				'tests/test_*.js'
+			]
+		},
+
+		concat: {
+			readme: {
+				src: [
+					'docs/intro.md',
+					'docs/issues.md',
+					'docs/installation.md',
+					'docs/parameters.md',
+					'node_modules/lintspaces/docs/options.md',
+					'docs/task-options.md',
+					'docs/examples.md',
+					'docs/contribution.md',
+					'docs/license.md'
+				],
+				dest: 'README.md'
+			}
+		},
+
+		lintspaces: {
+			self: {
+				src: [
+					'Gruntfile.js',
+					'tasks/**/*.js',
+					'tests/*.js',
+					'docs/*.md'
+				],
+				options: {
+					newline: true,
+					trailingspaces: true,
+					indentation: 'tabs',
+					ignores: ['js-comments'],
+
+					// Own options:
+					showValid: true,
+					showTypes: true,
+					showCodes: true
+				}
+			},
+			newline_okay: {
+				src: ['tests/files/newline_okay.txt'],
+				options: {
+					newline: true,
+					newlineBlocks: 2
+				}
+			},
+			newline_missing: {
+				src: ['tests/files/newline_missing.txt'],
+				options: {
+					newline: true
+				}
+			},
+			newlines_toomuch: {
+				src: ['tests/files/newline_toomuch.txt'],
+				options: {
+					newline: true,
+					newlineMaximum: 2
+				}
+			},
+			newlines_amount_invalid: {
+				src: ['tests/files/newline_toomuch.txt'],
+				options: {
+					newlineMaximum: 0
+				}
+			},
+			trailingspaces: {
+				src: ['tests/files/trailingspaces.txt'],
+				options: {
+					trailingspaces: true
+				}
+			},
+			indentation_tabs: {
+				src: ['tests/files/indentation_tabs.txt'],
+				options: {
+					indentation: 'tabs'
+				}
+			},
+			indentation_spaces: {
+				src: ['tests/files/indentation_spaces.txt'],
+				options: {
+					indentation: 'spaces'
+				}
+			},
+			indentation_spaces_3: {
+				src: ['tests/files/indentation_spaces.txt'],
+				options: {
+					indentation: 'spaces',
+					spaces: 3
+				}
+			},
+			comments_pattern: {
+				src: ['tests/files/comments/comments.js'],
+				options: {
+					indentation: 'tabs',
+					ignores: [
+						/'''[\s\S]*?'''/g, //Python
+						/\/\*[\s\S]*?\*\//g //C, JavaScript, Java, AS3 etc.
+					]
+				}
+			},
+			comments_buildin_js: {
+				src: ['tests/files/comments/comments.js'],
+				options: {
+					indentation: 'tabs',
+					ignores: ['js-comments']
+				}
+			},
+			comments_buildin_py: {
+				src: ['tests/files/comments/comments.py'],
+				options: {
+					indentation: 'spaces',
+					spaces: 4,
+					ignores: ['python-comments']
+				}
+			},
+			comments_buildin_xml: {
+				src: ['tests/files/comments/comments.xml'],
+				options: {
+					indentation: 'tabs',
+					ignores: ['xml-comments']
+				}
+			},
+			comments_nomatches: {
+				src: ['tests/files/comments/comments.nomatches'],
+				options: {
+					indentation: 'tabs',
+					ignores: [
+						'js-comments',
+						'html-comments'
+					]
+				}
+			},
+			directory: {
+				src: ['tests/files'],
+				options: {
+					indentation: 'tabs'
+				}
+			},
+			editorconfig: {
+				src: ['tests/files/comments/comments.js'],
+				options: {
+					ignores: ['js-comments'],
+					editorconfig: 'tests/files/.editorconfig'
+				}
+			},
+			editorconfig_notfound: {
+				src: ['tests/files/comments/comments.js'],
+				options: {
+					ignores: ['js-comments'],
+					editorconfig: 'path-doesnt-existis/.editorconfig'
+				}
+			},
+			junit_inactive: {
+				src: [
+					'tests/files/indentation_tabs.txt',
+					'tests/files/indentation_spaces.txt'
+				],
+				options: {
+					indentation: 'tabs'
+				}
+			},
+			junit_active: {
+				src: [
+					'tests/files/indentation_tabs.txt',
+					'tests/files/indentation_spaces.txt'
+				],
+				options: {
+					indentation: 'tabs',
+					junit: 'tests/temp/junit.xml'
+				}
+			}
+		}
+	});
+
+	// load tasks
+	grunt.loadTasks('tasks');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-nodeunit');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-jscs');
+
+	// define tasks ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>

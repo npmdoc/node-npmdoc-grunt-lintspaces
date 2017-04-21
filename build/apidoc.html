@@ -1,0 +1,307 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+    >grunt-lintspaces (v0.8.1)</a>
+</h1>
+<h4>A Grunt task for checking spaces in files</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.grunt-lintspaces">module grunt-lintspaces</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.grunt-lintspaces.grunt-lintspaces">
+            function <span class="apidocSignatureSpan"></span>grunt-lintspaces
+            <span class="apidocSignatureSpan">(grunt)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.grunt-lintspaces" id="apidoc.module.grunt-lintspaces">module grunt-lintspaces</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.grunt-lintspaces.grunt-lintspaces" id="apidoc.element.grunt-lintspaces.grunt-lintspaces">
+        function <span class="apidocSignatureSpan"></span>grunt-lintspaces
+        <span class="apidocSignatureSpan">(grunt)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">grunt-lintspaces = function (grunt) {
+	// project configuration
+	grunt.initConfig({
+		pkg: grunt.file.readJSON(&#x27;package.json&#x27;),
+
+		jshint: {
+			all: [
+				&#x27;Gruntfile.js&#x27;,
+				&#x27;tasks/**/*.js&#x27;,
+				&#x27;tests/*.js&#x27;
+			],
+			options: {
+				jshintrc: &#x27;.jshintrc&#x27;
+			}
+		},
+
+		jscs: {
+			all: [
+				&#x27;Gruntfile.js&#x27;,
+				&#x27;tasks/**/*.js&#x27;,
+				&#x27;tests/*.js&#x27;
+			]
+		},
+
+		nodeunit: {
+			all: [
+				&#x27;tests/test_*.js&#x27;
+			]
+		},
+
+		concat: {
+			readme: {
+				src: [
+					&#x27;docs/intro.md&#x27;,
+					&#x27;docs/issues.md&#x27;,
+					&#x27;docs/installation.md&#x27;,
+					&#x27;docs/parameters.md&#x27;,
+					&#x27;node_modules/lintspaces/docs/options.md&#x27;,
+					&#x27;docs/task-options.md&#x27;,
+					&#x27;docs/examples.md&#x27;,
+					&#x27;docs/contribution.md&#x27;,
+					&#x27;docs/license.md&#x27;
+				],
+				dest: &#x27;README.md&#x27;
+			}
+		},
+
+		lintspaces: {
+			self: {
+				src: [
+					&#x27;Gruntfile.js&#x27;,
+					&#x27;tasks/**/*.js&#x27;,
+					&#x27;tests/*.js&#x27;,
+					&#x27;docs/*.md&#x27;
+				],
+				options: {
+					newline: true,
+					trailingspaces: true,
+					indentation: &#x27;tabs&#x27;,
+					ignores: [&#x27;js-comments&#x27;],
+
+					// Own options:
+					showValid: true,
+					showTypes: true,
+					showCodes: true
+				}
+			},
+			newline_okay: {
+				src: [&#x27;tests/files/newline_okay.txt&#x27;],
+				options: {
+					newline: true,
+					newlineBlocks: 2
+				}
+			},
+			newline_missing: {
+				src: [&#x27;tests/files/newline_missing.txt&#x27;],
+				options: {
+					newline: true
+				}
+			},
+			newlines_toomuch: {
+				src: [&#x27;tests/files/newline_toomuch.txt&#x27;],
+				options: {
+					newline: true,
+					newlineMaximum: 2
+				}
+			},
+			newlines_amount_invalid: {
+				src: [&#x27;tests/files/newline_toomuch.txt&#x27;],
+				options: {
+					newlineMaximum: 0
+				}
+			},
+			trailingspaces: {
+				src: [&#x27;tests/files/trailingspaces.txt&#x27;],
+				options: {
+					trailingspaces: true
+				}
+			},
+			indentation_tabs: {
+				src: [&#x27;tests/files/indentation_tabs.txt&#x27;],
+				options: {
+					indentation: &#x27;tabs&#x27;
+				}
+			},
+			indentation_spaces: {
+				src: [&#x27;tests/files/indentation_spaces.txt&#x27;],
+				options: {
+					indentation: &#x27;spaces&#x27;
+				}
+			},
+			indentation_spaces_3: {
+				src: [&#x27;tests/files/indentation_spaces.txt&#x27;],
+				options: {
+					indentation: &#x27;spaces&#x27;,
+					spaces: 3
+				}
+			},
+			comments_pattern: {
+				src: [&#x27;tests/files/comments/comments.js&#x27;],
+				options: {
+					indentation: &#x27;tabs&#x27;,
+					ignores: [
+						/&#x27;&#x27;&#x27;[\s\S]*?&#x27;&#x27;&#x27;/g, //Python
+						/\/\*[\s\S]*?\*\//g //C, JavaScript, Java, AS3 etc.
+					]
+				}
+			},
+			comments_buildin_js: {
+				src: [&#x27;tests/files/comments/comments.js&#x27;],
+				options: {
+					indentation: &#x27;tabs&#x27;,
+					ignores: [&#x27;js-comments&#x27;]
+				}
+			},
+			comments_buildin_py: {
+				src: [&#x27;tests/files/comments/comments.py&#x27;],
+				options: {
+					indentation: &#x27;spaces&#x27;,
+					spaces: 4,
+					ignores: [&#x27;python-comments&#x27;]
+				}
+			},
+			comments_buildin_xml: {
+				src: [&#x27;tests/files/comments/comments.xml&#x27;],
+				options: {
+					indentation: &#x27;tabs&#x27;,
+					ignores: [&#x27;xml-comments&#x27;]
+				}
+			},
+			comments_nomatches: {
+				src: [&#x27;tests/files/comments/comments.nomatches&#x27;],
+				options: {
+					indentation: &#x27;tabs&#x27;,
+					ignores: [
+						&#x27;js-comments&#x27;,
+						&#x27;html-comments&#x27;
+					]
+				}
+			},
+			directory: {
+				src: [&#x27;tests/files&#x27;],
+				options: {
+					indentation: &#x27;tabs&#x27;
+				}
+			},
+			editorconfig: {
+				src: [&#x27;tests/files/comments/comments.js&#x27;],
+				options: {
+					ignores: [&#x27;js-comments&#x27;],
+					editorconfig: &#x27;tests/files/.editorconfig&#x27;
+				}
+			},
+			editorconfig_notfound: {
+				src: [&#x27;tests/files/comments/comments.js&#x27;],
+				options: {
+					ignores: [&#x27;js-comments&#x27;],
+					editorconfig: &#x27;path-doesnt-existis/.editorconfig&#x27;
+				}
+			},
+			junit_inactive: {
+				src: [
+					&#x27;tests/files/indentation_tabs.txt&#x27;,
+					&#x27;tests/files/indentation_spaces.txt&#x27;
+				],
+				options: {
+					indentation: &#x27;tabs&#x27;
+				}
+			},
+			junit_active: {
+				src: [
+					&#x27;tests/files/indentation_tabs.txt&#x27;,
+					&#x27;tests/files/indentation_spaces.txt&#x27;
+				],
+				options: {
+					indentation: &#x27;tabs&#x27;,
+					junit: &#x27;tests/temp/junit.xml&#x27;
+				}
+			}
+		}
+	});
+
+	// load tasks
+	grunt.loadTasks(&#x27;tasks&#x27;);
+	grunt.loadNpmTasks(&#x27;grunt-contrib-jshint&#x27;);
+	grunt.loadNpmTasks(&#x27;grunt-contrib-nodeunit&#x27;);
+	grunt.loadNpmTasks(&#x27;grunt-contrib-concat&#x27;);
+	grunt.loadNpmTasks(&#x27;grunt-jscs&#x27;);
+
+	// define tasks ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
